@@ -6,27 +6,31 @@
     <title>Document</title>
 </head>
 <body>
-    <section>
+    <section class="container">
         <!--heading-->
         <h1>PASSWORD GENERATOR</h1>
 
         <!--Password field-->
-        <div>
-            <input passwordInput placeholder="PASSWORD">
-            <img src="./assets/copy.svg" alt="">
+        <div class="display-container">
+            <input data-passwordDisplay placeholder="PASSWORD">
+            <button>
+                <span data-copyMsg></span>
+                <img src="./assets/copy.svg" alt="" width="23" height="23">
+            </button>
         </div>
 
         <!--body-->
-        <div>
+        <div class="input-container">
             <!-- Password Length  -->
-            <div>
+            <div class="length-container">
                 <p>Password Length</p>
                 <p data-lengthNumber>0</p>
             </div>
 
             <!-- slider  -->
-             <input type="range" min="1" max="20" data-lengthSlider>
+             <input type="range" min="1" max="20" class="slider" step="1" data-lengthSlider>
              
+             <!-- checkboxes  -->
              <input type="checkbox" name="" id="uppercase">
              <label for="">Include Uppercase Letters</label>
 

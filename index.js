@@ -5,6 +5,7 @@ const uppercaseCheck = document.querySelector("#uppercase");
 const lowercaseCheck = document.querySelector("#lowercase");
 const numbersCheck = document.querySelector("#numbers");
 const symbolsCheck = document.querySelector("#symbols");
+const copyMsg = document.querySelector("[data-copyMsg]");
 const symbols = '~`!@#$%^&*()_-+={[}]|:;"<,>.?/';
 
 
@@ -63,6 +64,24 @@ function calStrength(){
     else{
         setIndicator("#f00");
     }
+
+}
+
+async function copyContent(){
+    try{
+        await navigator.clipboard.writeText(passwordDisplay.value);
+        copyMsg.innerText = "copied";
+    }
+    catch(e){
+        copyMsg.innerText = "Failed";
+    }
+
+    //to make copy wala span visible
+    copyMsg.classList.add("active");   
+
+    setTimeout(()=>{
+        copyMsg.classList.remove("active");
+    }, 2000);
 
 }
 
