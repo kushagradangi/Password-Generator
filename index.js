@@ -9,14 +9,13 @@ const copyMsg = document.querySelector("[data-copyMsg]");
 const symbols = '~`!@#$%^&*()_-+={[}]|:;"<,>.?/';
 
 
-
-defaultPasswordLength=10;
+let passwordLength = 10;
 
 handleSlider();
 
 function handleSlider(){
-    lengthDisplay.innerText= defaultPasswordLength;
-    inputSlider.value= defaultPasswordLength;
+    lengthDisplay.innerText= passwordLength;
+    inputSlider.value= passwordLength;
 
 }
 
@@ -84,6 +83,14 @@ async function copyContent(){
     }, 2000);
 
 }
+
+inputSlider.addEventListener('input', (e)=>{
+    passwordLength = e.target.value;
+    handleSlider();
+})
+
+
+
 
 
 
