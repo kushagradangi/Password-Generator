@@ -21,6 +21,10 @@ function getRandomInteger(min, max){
     return Math.floor(Math.random()*(max-min))+min;
 }
 
+function generateLowerCase(){
+    return String.fromCharCode(getRandomInteger(97,123));
+}
+
 
 
 
