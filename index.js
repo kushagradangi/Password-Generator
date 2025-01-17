@@ -1,4 +1,4 @@
-const inputSlider=document.querySelector("[data-lenngthSlider]");
+const inputSlider=document.querySelector("[data-lengthSlider]");
 const lengthDisplay=document.querySelector("[data-lengthNumber]");
 const indicator= document.querySelector("[data-Indicator]");
 const uppercaseCheck = document.querySelector("#uppercase");
@@ -6,19 +6,24 @@ const lowercaseCheck = document.querySelector("#lowercase");
 const numbersCheck = document.querySelector("#numbers");
 const symbolsCheck = document.querySelector("#symbols");
 const copyMsg = document.querySelector("[data-copyMsg]");
+const copyBtn = document.querySelector("[data-copy]");
+const allCheckBox = document.querySelectorAll("input[type=checkbox]");
 const symbols = '~`!@#$%^&*()_-+={[}]|:;"<,>.?/';
 
-let password="";
 let passwordLength = 10;
+let checkCount = 0;
 
 handleSlider();
 
 function handleSlider(){
     inputSlider.value= passwordLength;
     lengthDisplay.innerText= passwordLength;
-    
-
 }
+
+inputSlider.addEventListener('input', (e)=>{
+    passwordLength = e.target.value;
+    handleSlider();
+});
 
 function setIndicator(color){
     indicator.style.backgroundColor= color;
@@ -85,10 +90,32 @@ async function copyContent(){
 
 }
 
-inputSlider.addEventListener('input', (e)=>{
-    passwordLength = e.target.value;
-    handleSlider();
+function handleCheckBoxChange(){
+    checkCount = 0;
+    allCheckBox.forEach((checkbox) => {
+        if(checkbox.checked)
+            checkCount++;
+    });
+
+    //special condition 
+    if(passwordLength<checkCount){
+        passwordLength = checkCount;
+        handleSlider();
+    }
+}
+
+allCheckBox.forEach((checkbox) => {
+    checkbox.addEventListener('change',handleCheckBoxChange);
 });
+
+copyBtn.addEventListener('click', () => {
+    if(passwordDisplay.value)
+        copyContent();
+}); 
+
+ 
+
+
 
 
 
