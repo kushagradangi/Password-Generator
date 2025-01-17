@@ -1,5 +1,5 @@
-const lengthDisplay=document.querySelector("[data-lengthNumber]");
 const inputSlider=document.querySelector("[data-lenngthSlider]");
+const lengthDisplay=document.querySelector("[data-lengthNumber]");
 const indicator= document.querySelector("[data-Indicator]");
 const uppercaseCheck = document.querySelector("#uppercase");
 const lowercaseCheck = document.querySelector("#lowercase");
@@ -8,14 +8,15 @@ const symbolsCheck = document.querySelector("#symbols");
 const copyMsg = document.querySelector("[data-copyMsg]");
 const symbols = '~`!@#$%^&*()_-+={[}]|:;"<,>.?/';
 
-
+let password="";
 let passwordLength = 10;
 
 handleSlider();
 
 function handleSlider(){
-    lengthDisplay.innerText= passwordLength;
     inputSlider.value= passwordLength;
+    lengthDisplay.innerText= passwordLength;
+    
 
 }
 
@@ -87,7 +88,7 @@ async function copyContent(){
 inputSlider.addEventListener('input', (e)=>{
     passwordLength = e.target.value;
     handleSlider();
-})
+});
 
 
 
