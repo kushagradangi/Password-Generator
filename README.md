@@ -1,1 +1,1 @@
-# This is a Password generator website
+# This is a Password generator website.
