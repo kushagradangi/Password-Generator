@@ -10,9 +10,11 @@ const symbolsCheck = document.querySelector("#symbols");
 const copyMsg = document.querySelector("[data-copyMsg]");
 const copyBtn = document.querySelector("[data-copy]");
 const allCheckBox = document.querySelectorAll("input[type=checkbox]");
-const generateBtn = document.querySelector(".generateButton")
+const generateBtn = document.querySelector(".generateButton");
 const symbols = '~`!@#$%^&*()_-+={[}]|:;"<,>.?/';
 
+
+//initially
 let password = "";
 let passwordLength = 10;
 let checkCount = 0;
@@ -33,7 +35,7 @@ function getRandomInteger(min, max){
 }
 
 function generateRandomNumber(){
-    return getRandomInteger(0.9);
+    return getRandomInteger(0,9);
 }
 
 function generateLowerCase(){
@@ -93,15 +95,16 @@ async function copyContent(){
 
 }
 
-function shufflePassword(array){
-    for(let i=array.length-1; i>0; i--){
-        const j = Math.floor(Math.random() * (i+1));
+function shufflePassword(array) {
+    //Fisher Yates Method
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
         const temp = array[i];
         array[i] = array[j];
         array[j] = temp;
-    }    
+      }
     let str = "";
-    array.forEach((el)=>(str += el));
+    array.forEach((el) => (str += el));
     return str;
 }
 
@@ -113,7 +116,7 @@ function handleCheckBoxChange(){
     });
 
     //special condition 
-    if(passwordLength<checkCount){
+    if(passwordLength < checkCount){
         passwordLength = checkCount;
         handleSlider();
     }
@@ -133,18 +136,18 @@ copyBtn.addEventListener('click', () => {
         copyContent();
 }); 
 
-generateBtn.addEventListner('click', ()=>{
+generateBtn.addEventListener('click', ()=>{
 
     //none of the checkbox are selected
-    if(checkCount==0) return;
+    if(checkCount==0) 
+        return;
 
-    if(passwordLength<checkCount){
+    if(passwordLength  < checkCount){
         passwordLength = checkCount;
         handleSlider();
     }
-});
 
-//finding new password
+    //finding new password
 
 // remove old password 
 password = "";
@@ -164,7 +167,7 @@ let funcArr = [];
         funcArr.push(generateSymbol);
 
     //compulsory addition
-    for(let i=0; i<=funcArr.length; i++){
+    for(let i=0; i<funcArr.length; i++){
         password += funcArr[i]();
     }
 
@@ -180,6 +183,9 @@ let funcArr = [];
 
     // calculate calStrength 
     calStrength();
+});
+
+
 
 
 
