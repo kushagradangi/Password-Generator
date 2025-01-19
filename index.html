@@ -7,13 +7,14 @@
 </head>
 <body>
     <section class="container">
+
         <!--heading-->
         <h1>PASSWORD GENERATOR</h1>
-
+  
         <!--Password field-->
         <div class="display-container">
             <input data-passwordDisplay placeholder="PASSWORD">
-            <button data-copy class="copyBtn">
+            <button data-copy >
                 <span data-copyMsg></span>
                 <img src="./assets/copy.svg" alt="copy" width="23" height="23">
             </button>
@@ -21,6 +22,7 @@
 
         <!--body-->
         <div class="input-container">
+
             <!-- Password Length  -->
             <div class="length-container">
                 <p>Password Length</p>
@@ -44,13 +46,13 @@
              <label for="">Include Symbols</label>
 
             <!-- Strength -->
-             <div>
+             <div class="strength-container">
                 <p>Strength</p>
-                <div data-Indicator></div>
+                <div data-indicator></div>
              </div>
 
              <!-- Generate passwod button  -->
-             <button>GENERATE PASSWORD</button>
+             <button class="generateButton">GENERATE PASSWORD</button>
         </div>
     </section>
 
