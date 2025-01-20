@@ -1,6 +1,5 @@
 const inputSlider=document.querySelector("[data-lengthSlider]");
 const lengthDisplay=document.querySelector("[data-lengthNumber]");
-
 const passwordDisplay = document.querySelector("[data-passwordDisplay]");
 const indicator= document.querySelector("[data-indicator]");
 const uppercaseCheck = document.querySelector("#uppercase");
@@ -14,19 +13,21 @@ const generateBtn = document.querySelector(".generateButton");
 const symbols = '~`!@#$%^&*()_-+={[}]|:;"<,>.?/';
 
 
-//initially
+// initial values
 let password = "";
 let passwordLength = 10;
 let checkCount = 0;
  
 handleSlider();
+
+//set strength color to grey
 setIndicator("#ccc");
 
 function handleSlider(){
     inputSlider.value= passwordLength;
     lengthDisplay.innerText= passwordLength;
 
-     //or kuch bhi karna chahiye ? - HW
+     //To set bg color of slider to black
      const min = inputSlider.min;
      const max = inputSlider.max;
      inputSlider.style.backgroundSize = ( (passwordLength - min)*100/(max - min)) + "% 100%";
@@ -34,6 +35,7 @@ function handleSlider(){
 
 function setIndicator(color){
     indicator.style.backgroundColor= color;
+     //for shadow effect 
     indicator.style.boxShadow = `0px 0px 12px 1px ${color}`;
 }
 
@@ -60,7 +62,7 @@ function generateSymbol(){
 
 function calStrength(){
     let hasUpper = false;
-    let hasLower = false;
+    let hasLower = false;         //Taking value = false at starting for all  
     let hasNum = false;
     let hasSym = false;
     if(uppercaseCheck.checked) hasUpper = true;
@@ -86,26 +88,28 @@ function calStrength(){
 
 async function copyContent(){
     try{
-        await navigator.clipboard.writeText(passwordDisplay.value);
+        await navigator.clipboard.writeText(passwordDisplay.value);     //navigator.clipboard.writeText is a method in JS to copy to clipboard 
         copyMsg.innerText = "copied";
     }
     catch(e){
         copyMsg.innerText = "Failed";
     }
 
-    //to make copy wala span visible
-    copyMsg.classList.add("active");   
+    //to make copied text(span) visible
+    copyMsg.classList.add("active");           // newClass to be added in stylehseet.
 
     setTimeout(()=>{
         copyMsg.classList.remove("active");
-    }, 2000);
+    }, 2000);        // copied text will be hidden after 2sec
 
 }
 
+  //Shuffling the password
 function shufflePassword(array) {
-    //Fisher Yates Method
+    //Fisher Yates Method- An algorithm used in shuffling.
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
+        //Swap number at i index and j index.
         const temp = array[i];
         array[i] = array[j];
         array[j] = temp;
@@ -115,6 +119,7 @@ function shufflePassword(array) {
     return str;
 }
 
+// count the no. of cheked checkboxes and update the password length and slider.
 function handleCheckBoxChange(){
     checkCount = 0;
     allCheckBox.forEach((checkbox) => {
@@ -133,19 +138,20 @@ allCheckBox.forEach((checkbox) => {
     checkbox.addEventListener('change',handleCheckBoxChange);
 });
 
+//Event listener on Slider
 inputSlider.addEventListener('input', (e)=>{
     passwordLength = e.target.value;
     handleSlider();
 });   
 
 copyBtn.addEventListener('click', () => {
-    if(passwordDisplay.value)
+    if(passwordDisplay.value)         // we can also use password length >0
         copyContent();
 }); 
 
 generateBtn.addEventListener('click', ()=>{
 
-    //none of the checkbox are selected
+    //If none checkboxes are selected
     if(checkCount==0) 
         return;
 
@@ -154,9 +160,10 @@ generateBtn.addEventListener('click', ()=>{
         handleSlider();
     }
 
-    //finding new password
 
-// remove old password 
+    //Creating a new Password
+
+// removing old password 
 password = "";
 
 let funcArr = [];
@@ -184,11 +191,12 @@ let funcArr = [];
         password += funcArr[randIndex]();
     }
 
-    // shuffle the password 
+    // shuffling the password 
     password = shufflePassword(Array.from(password));
+    //Show in UI
     passwordDisplay.value = password;
 
-    // calculate calStrength 
+    // calculate Strength 
     calStrength();
 });
 
